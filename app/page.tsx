@@ -1,132 +1,187 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Shield,
+  FileText,
   AlertTriangle,
   Phone,
   CreditCard,
   LinkIcon,
-  FileText,
   Search,
-  BookOpen,
-  Lightbulb,
-  Info,
-  Mail,
-  MapPin,
   ChevronRight,
+  Eye,
+  Lock,
+  Zap,
+  ArrowRight,
 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent } from "@/components/ui/card";
+import { useState } from "react";
 
-const fraudTypes = [
+const features = [
   {
-    icon: Phone,
-    title: "Phishing",
-    description:
-      "Penipuan melalui email, SMS, atau telepon yang mengaku dari lembaga resmi untuk mencuri data pribadi.",
+    icon: FileText,
+    title: "Laporan Mudah",
+    description: "Formulir laporan yang intuitif membantu Anda menjelaskan insiden siber dengan detail yang diperlukan.",
   },
   {
-    icon: CreditCard,
-    title: "Penipuan Online",
-    description:
-      "Penipuan yang terjadi di platform e-commerce, marketplace, atau media sosial.",
+    icon: Eye,
+    title: "Pelacakan Real-time",
+    description: "Pantau status laporan Anda secara langsung dari dashboard kapan saja.",
   },
   {
-    icon: AlertTriangle,
-    title: "Malware & Ransomware",
-    description:
-      "Serangan perangkat lunak berbahaya yang mengenkripsi data atau mencuri informasi.",
+    icon: Lock,
+    title: "Data Terjamin",
+    description: "Semua laporan dan data pribadi Anda dilindungi dengan enkripsi tingkat enterprise.",
   },
   {
-    icon: Shield,
-    title: "Identity Theft",
-    description:
-      "Pencurian identitas untuk melakukan transaksi atau tindakan ilegal atas nama korban.",
+    icon: Zap,
+    title: "Respon Cepat",
+    description: "Tim investigasi kami merespon laporan dalam waktu 24 jam untuk kasus prioritas.",
   },
 ];
 
-const safetyTips = [
+const steps = [
   {
-    title: "Jangan Klik Link Mencurigakan",
-    description:
-      "Selalu verifikasi URL sebelum memasukkan data pribadi. Pastikan situs menggunakan HTTPS.",
+    step: "01",
+    title: "Buat Laporan",
+    description: "Isi formulir dengan detail insiden yang Anda alami. Sertakan bukti jika ada.",
   },
   {
-    title: "Gunakan Kata Sandi Kuat",
-    description:
-      "Buat kata sandi unik untuk setiap akun dan aktifkan autentikasi dua faktor.",
+    step: "02",
+    title: "Verifikasi",
+    description: "Tim kami memverifikasi laporan Anda dan menentukan prioritas penanganan.",
   },
   {
-    title: "Waspada Penawaran Terlalu Bagus",
-    description:
-      "Jika terdengar terlalu bagus untuk menjadi kenyataan, kemungkinan itu penipuan.",
+    step: "03",
+    title: "Investigasi",
+    description: "Tim investigasi siber mulai bekerja untuk melacak dan menangani kasus Anda.",
   },
   {
-    title: "Backup Data Secara Berkala",
-    description:
-      "Simpan cadangan data penting di tempat terpisah untuk melindungi dari serangan ransomware.",
+    step: "04",
+    title: "Penyelesaian",
+    description: "Anda menerima update status dan hasil penanganan laporan.",
   },
 ];
 
-export default function HomePage() {
+const stats = [
+  { value: "12,500+", label: "Laporan Diterima" },
+  { value: "98%", label: "Tingkat Penyelesaian" },
+  { value: "24 jam", label: "Waktu Respon" },
+  { value: "50+", label: "Tim Investigasi" },
+];
+
+const crimeTypes = [
+  { icon: Phone, name: "Phishing", color: "bg-blue-100 text-blue-600" },
+  { icon: CreditCard, name: "Penipuan Online", color: "bg-amber-100 text-amber-600" },
+  { icon: AlertTriangle, name: "Malware", color: "bg-red-100 text-red-600" },
+  { icon: Shield, name: "Identity Theft", color: "bg-purple-100 text-purple-600" },
+];
+
+export default function Beranda() {
   const [cekNomor, setCekNomor] = useState("");
   const [cekRekening, setCekRekening] = useState("");
   const [cekLink, setCekLink] = useState("");
 
   return (
-    <div className="flex flex-col">
-      {/* Hero Section */}
-      <section className="py-16 px-4 bg-blue-50">
-        <div className="container mx-auto max-w-7xl text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 text-blue-700 text-sm font-medium mb-6">
-            <Shield className="h-4 w-4" />
-            Melindungi Keamanan Digital
+    <div className="min-h-screen">
+      {/* Navbar */}
+      <nav className="sticky top-0 z-50 w-full border-b bg-white/80 backdrop-blur-md">
+        <div className="container mx-auto flex h-16 items-center justify-between px-4 max-w-7xl">
+          <Link href="/" className="flex items-center gap-2 font-bold text-xl">
+            <Shield className="h-7 w-7 text-blue-600" />
+            <span>LaporSiber</span>
+          </Link>
+          <div className="hidden md:flex items-center gap-8">
+            <a href="#fitur" className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Fitur</a>
+            <a href="#cara-kerja" className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Cara Kerja</a>
+            <a href="#cek" className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Cek Penipuan</a>
+            <a href="#statistik" className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Statistik</a>
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">
-            Laporkan Kejahatan Siber
-          </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
-            Bantu kami memerangi ancaman siber dengan melaporkan phishing, penipuan,
-            malware, dan kejahatan digital lainnya. Laporan Anda membuat perbedaan.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/reporter/report/new">
-              <Button size="lg" className="text-lg px-8">
-                Buat Laporan
-              </Button>
-            </Link>
+          <div className="flex items-center gap-3">
             <Link href="/login">
-              <Button variant="outline" size="lg" className="text-lg px-8">
-                Masuk
-              </Button>
+              <Button variant="ghost" size="sm">Masuk</Button>
             </Link>
+            <Link href="/reporter/report/new">
+              <Button size="sm">Buat Laporan</Button>
+            </Link>
+          </div>
+        </div>
+      </nav>
+
+      {/* Hero */}
+      <section className="relative py-20 px-4 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-blue-50" />
+        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-100 rounded-full blur-3xl opacity-40" />
+        <div className="absolute bottom-10 right-10 w-96 h-96 bg-blue-50 rounded-full blur-3xl opacity-50" />
+        <div className="container mx-auto max-w-7xl relative">
+          <div className="max-w-3xl mx-auto text-center">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 text-blue-700 text-sm font-medium mb-6">
+              <Shield className="h-4 w-4" />
+              Platform Pelaporan Kejahatan Siber #1 di Indonesia
+            </div>
+            <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-6">
+              Laporkan Kejahatan
+              <span className="text-blue-600"> Siber</span>
+              <br />
+              Dengan Mudah
+            </h1>
+            <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
+              Bantu kami memerangi ancaman siber dengan melaporkan phishing, penipuan,
+              malware, dan kejahatan digital lainnya. Laporan Anda membuat perbedaan.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/reporter/report/new">
+                <Button size="lg" className="text-lg px-8 gap-2">
+                  Buat Laporan Sekarang
+                  <ArrowRight className="h-5 w-5" />
+                </Button>
+              </Link>
+              <a href="#cara-kerja">
+                <Button variant="outline" size="lg" className="text-lg px-8">
+                  Pelajari Selengkapnya
+                </Button>
+              </a>
+            </div>
+          </div>
+
+          {/* Crime Types */}
+          <div className="flex justify-center gap-4 mt-16">
+            {crimeTypes.map((type) => {
+              const Icon = type.icon;
+              return (
+                <div key={type.name} className={`flex items-center gap-2 px-4 py-2 rounded-full ${type.color} text-sm font-medium`}>
+                  <Icon className="h-4 w-4" />
+                  <span className="hidden sm:inline">{type.name}</span>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* Jenis Penipuan */}
-      <section className="py-16 px-4">
+      {/* Features */}
+      <section id="fitur" className="py-20 px-4 bg-white">
         <div className="container mx-auto max-w-7xl">
-          <h2 className="text-3xl font-bold text-center mb-4">
-            Jenis Penipuan Siber
-          </h2>
-          <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-            Kenali berbagai jenis kejahatan siber agar Anda dapat lebih waspada
-          </p>
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Mengapa LaporSiber?</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Platform kami dirancang untuk memberikan pengalaman pelaporan yang cepat, aman, dan efektif.
+            </p>
+          </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {fraudTypes.map((type) => {
-              const Icon = type.icon;
+            {features.map((feature) => {
+              const Icon = feature.icon;
               return (
-                <Card key={type.title} className="border shadow-sm hover:shadow-md transition-shadow">
+                <Card key={feature.title} className="border-0 shadow-sm hover:shadow-md transition-shadow">
                   <CardContent className="pt-6">
-                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 text-blue-600 mb-4">
+                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-blue-100 text-blue-600 mb-4">
                       <Icon className="h-6 w-6" />
                     </div>
-                    <h3 className="text-lg font-semibold mb-2">{type.title}</h3>
-                    <p className="text-sm text-gray-600">{type.description}</p>
+                    <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
+                    <p className="text-sm text-gray-600 leading-relaxed">{feature.description}</p>
                   </CardContent>
                 </Card>
               );
@@ -135,324 +190,162 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* How it works */}
+      <section id="cara-kerja" className="py-20 px-4 bg-gray-50">
+        <div className="container mx-auto max-w-5xl">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Cara Kerja</h2>
+            <p className="text-gray-600">Proses pelaporan yang sederhana dalam 4 langkah</p>
+          </div>
+          <div className="grid md:grid-cols-4 gap-8">
+            {steps.map((step, index) => (
+              <div key={step.step} className="text-center">
+                <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-blue-600 text-white text-xl font-bold mb-4">
+                  {step.step}
+                </div>
+                <h3 className="font-semibold mb-2">{step.title}</h3>
+                <p className="text-sm text-gray-600">{step.description}</p>
+                {index < steps.length - 1 && (
+                  <ChevronRight className="hidden md:block h-5 w-5 text-gray-300 absolute -right-4 top-6" />
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Cek Penipuan */}
-      <section className="py-16 px-4 bg-gray-50">
+      <section id="cek" className="py-20 px-4 bg-white">
         <div className="container mx-auto max-w-5xl">
-          <h2 className="text-3xl font-bold text-center mb-4">Cek Penipuan</h2>
-          <p className="text-center text-gray-600 mb-12">
-            Verifikasi nomor telepon, rekening bank, atau link sebelum Anda percaya
-          </p>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            {/* Cek Nomor Telepon */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-lg">
-                  <Phone className="h-5 w-5 text-blue-600" />
-                  Cek Nomor Telepon
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  <Input
-                    placeholder="Masukkan nomor telepon"
-                    value={cekNomor}
-                    onChange={(e) => setCekNomor(e.target.value)}
-                  />
-                  <Button className="w-full" variant="outline">
-                    <Search className="h-4 w-4 mr-2" />
-                    Cek Nomor
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Cek Rekening */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-lg">
-                  <CreditCard className="h-5 w-5 text-blue-600" />
-                  Cek Rekening Bank
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  <Input
-                    placeholder="Masukkan nomor rekening"
-                    value={cekRekening}
-                    onChange={(e) => setCekRekening(e.target.value)}
-                  />
-                  <Button className="w-full" variant="outline">
-                    <Search className="h-4 w-4 mr-2" />
-                    Cek Rekening
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Cek Link */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-lg">
-                  <LinkIcon className="h-5 w-5 text-blue-600" />
-                  Cek Link
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  <Input
-                    placeholder="Masukkan URL/link"
-                    value={cekLink}
-                    onChange={(e) => setCekLink(e.target.value)}
-                  />
-                  <Button className="w-full" variant="outline">
-                    <Search className="h-4 w-4 mr-2" />
-                    Cek Link
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Cek Penipuan</h2>
+            <p className="text-gray-600">Verifikasi nomor telepon, rekening bank, atau link sebelum Anda percaya</p>
           </div>
+          <Card className="border shadow-sm">
+            <CardContent className="p-6">
+              <div className="grid md:grid-cols-3 gap-6">
+                <div className="space-y-3">
+                  <label className="text-sm font-medium flex items-center gap-2">
+                    <Phone className="h-4 w-4 text-blue-600" />
+                    Cek Nomor Telepon
+                  </label>
+                  <div className="flex gap-2">
+                    <Input placeholder="08xxx" value={cekNomor} onChange={(e) => setCekNomor(e.target.value)} />
+                    <Button variant="outline"><Search className="h-4 w-4" /></Button>
+                  </div>
+                </div>
+                <div className="space-y-3">
+                  <label className="text-sm font-medium flex items-center gap-2">
+                    <CreditCard className="h-4 w-4 text-blue-600" />
+                    Cek Rekening Bank
+                  </label>
+                  <div className="flex gap-2">
+                    <Input placeholder="1234567890" value={cekRekening} onChange={(e) => setCekRekening(e.target.value)} />
+                    <Button variant="outline"><Search className="h-4 w-4" /></Button>
+                  </div>
+                </div>
+                <div className="space-y-3">
+                  <label className="text-sm font-medium flex items-center gap-2">
+                    <LinkIcon className="h-4 w-4 text-blue-600" />
+                    Cek Link / URL
+                  </label>
+                  <div className="flex gap-2">
+                    <Input placeholder="https://..." value={cekLink} onChange={(e) => setCekLink(e.target.value)} />
+                    <Button variant="outline"><Search className="h-4 w-4" /></Button>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </section>
 
-      {/* Laporan */}
-      <section className="py-16 px-4">
-        <div className="container mx-auto max-w-5xl">
-          <h2 className="text-3xl font-bold text-center mb-4">Laporan</h2>
-          <p className="text-center text-gray-600 mb-12">
-            Laporkan insiden siber atau cek status laporan Anda
-          </p>
-
-          <div className="grid md:grid-cols-2 gap-6">
-            <Card className="hover:shadow-md transition-shadow">
-              <CardContent className="pt-6">
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 text-blue-600 mb-4">
-                  <FileText className="h-6 w-6" />
-                </div>
-                <h3 className="text-xl font-semibold mb-2">Buat Laporan</h3>
-                <p className="text-gray-600 mb-4">
-                  Kirimkan laporan kejahatan siber yang Anda alami atau saksikan.
-                  Formulir laporan kami membantu Anda memberikan detail yang diperlukan.
-                </p>
-                <Link href="/reporter/report/new">
-                  <Button className="w-full">
-                    Mulai Laporan
-                    <ChevronRight className="h-4 w-4 ml-2" />
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
-
-            <Card className="hover:shadow-md transition-shadow">
-              <CardContent className="pt-6">
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-green-100 text-green-600 mb-4">
-                  <Search className="h-6 w-6" />
-                </div>
-                <h3 className="text-xl font-semibold mb-2">Cek Status Laporan</h3>
-                <p className="text-gray-600 mb-4">
-                  Pantau status laporan yang sudah Anda kirim. Ketahui perkembangan
-                  penanganan laporan Anda.
-                </p>
-                <Link href="/login">
-                  <Button variant="outline" className="w-full">
-                    Cek Status
-                    <ChevronRight className="h-4 w-4 ml-2" />
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Pusat Informasi */}
-      <section className="py-16 px-4 bg-gray-50">
+      {/* Stats */}
+      <section id="statistik" className="py-20 px-4 bg-blue-600 text-white">
         <div className="container mx-auto max-w-7xl">
-          <h2 className="text-3xl font-bold text-center mb-4">
-            Pusat Informasi
-          </h2>
-          <p className="text-center text-gray-600 mb-12">
-            Berita terkini dan tips keamanan digital
-          </p>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Berita */}
-            <div>
-              <div className="flex items-center gap-2 mb-6">
-                <BookOpen className="h-5 w-5 text-blue-600" />
-                <h3 className="text-xl font-semibold">Berita Terkini</h3>
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Statistik Kami</h2>
+            <p className="text-blue-100">Dipercaya oleh jutaan pengguna di seluruh Indonesia</p>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {stats.map((stat) => (
+              <div key={stat.label} className="text-center">
+                <p className="text-4xl md:text-5xl font-bold mb-2">{stat.value}</p>
+                <p className="text-blue-100">{stat.label}</p>
               </div>
-              <div className="space-y-4">
-                <Card className="hover:shadow-md transition-shadow cursor-pointer">
-                  <CardContent className="pt-4">
-                    <div className="text-xs text-blue-600 font-medium mb-1">
-                      15 Januari 2025
-                    </div>
-                    <h4 className="font-semibold mb-1">
-                      Kasus Phishing Bank Meningkat 30% di Awal Tahun
-                    </h4>
-                    <p className="text-sm text-gray-600 line-clamp-2">
-                      Kepolisian melaporkan peningkatan signifikan kasus phishing
-                      yang mengatasnamakan bank-bank besar di Indonesia.
-                    </p>
-                  </CardContent>
-                </Card>
-
-                <Card className="hover:shadow-md transition-shadow cursor-pointer">
-                  <CardContent className="pt-4">
-                    <div className="text-xs text-blue-600 font-medium mb-1">
-                      10 Januari 2025
-                    </div>
-                    <h4 className="font-semibold mb-1">
-                      Waspada Penipuan Investasi Online
-                    </h4>
-                    <p className="text-sm text-gray-600 line-clamp-2">
-                      OJK mengingatkan masyarakat untuk berhati-hati terhadap
-                      investasi online yang menjanjikan keuntungan tidak realistis.
-                    </p>
-                  </CardContent>
-                </Card>
-
-                <Card className="hover:shadow-md transition-shadow cursor-pointer">
-                  <CardContent className="pt-4">
-                    <div className="text-xs text-blue-600 font-medium mb-1">
-                      5 Januari 2025
-                    </div>
-                    <h4 className="font-semibold mb-1">
-                      Serangan Ransomware Sasar Instansi Pemerintah
-                    </h4>
-                    <p className="text-sm text-gray-600 line-clamp-2">
-                      Beberapa instansi pemerintah menjadi target serangan
-                      ransomware yang mengenkripsi data penting.
-                    </p>
-                  </CardContent>
-                </Card>
-              </div>
-            </div>
-
-            {/* Tips Keamanan */}
-            <div>
-              <div className="flex items-center gap-2 mb-6">
-                <Lightbulb className="h-5 w-5 text-amber-500" />
-                <h3 className="text-xl font-semibold">Tips Keamanan</h3>
-              </div>
-              <div className="space-y-4">
-                {safetyTips.map((tip, index) => (
-                  <Card key={index} className="hover:shadow-md transition-shadow">
-                    <CardContent className="pt-4">
-                      <div className="flex items-start gap-3">
-                        <div className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-amber-100 text-amber-600 shrink-0">
-                          {index + 1}
-                        </div>
-                        <div>
-                          <h4 className="font-semibold mb-1">{tip.title}</h4>
-                          <p className="text-sm text-gray-600">
-                            {tip.description}
-                          </p>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Pusat Bantuan */}
-      <section className="py-16 px-4">
-        <div className="container mx-auto max-w-7xl">
-          <h2 className="text-3xl font-bold text-center mb-4">
-            Pusat Bantuan
-          </h2>
-          <p className="text-center text-gray-600 mb-12">
-            Butuh bantuan? Hubungi kami atau pelajari lebih lanjut
+      {/* CTA */}
+      <section className="py-20 px-4 bg-white">
+        <div className="container mx-auto max-w-4xl text-center">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-100 text-blue-600 mb-6">
+            <AlertTriangle className="h-8 w-8" />
+          </div>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Jadi Korban Kejahatan Siber?</h2>
+          <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
+            Jangan biarkan pelaku lolos. Laporkan insiden Anda sekarang dan bantu kami
+            menciptakan ekosistem digital yang lebih aman.
           </p>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Tentang Kami */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Info className="h-5 w-5 text-blue-600" />
-                  Tentang Kami
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <p className="text-gray-600">
-                  CyberGuard adalah platform pelaporan kejahatan siber yang
-                  bertujuan untuk membantu masyarakat Indonesia melindungi diri
-                  dari ancaman digital.
-                </p>
-                <p className="text-gray-600">
-                  Kami bekerja sama dengan pihak berwenang untuk menangani
-                  laporan kejahatan siber dan memberikan layanan verifikasi
-                  kepada masyarakat.
-                </p>
-                <p className="text-gray-600">
-                  Visi kami adalah menciptakan ekosistem digital yang aman dan
-                  terpercaya bagi seluruh masyarakat Indonesia.
-                </p>
-              </CardContent>
-            </Card>
-
-            {/* Kontak */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Mail className="h-5 w-5 text-blue-600" />
-                  Hubungi Kami
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="flex items-center gap-3">
-                  <Mail className="h-5 w-5 text-gray-400" />
-                  <div>
-                    <p className="text-sm text-gray-500">Email</p>
-                    <p className="font-medium">info@cyberguard.id</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Phone className="h-5 w-5 text-gray-400" />
-                  <div>
-                    <p className="text-sm text-gray-500">Telepon</p>
-                    <p className="font-medium">110 (Call Center Polisi)</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <MapPin className="h-5 w-5 text-gray-400" />
-                  <div>
-                    <p className="text-sm text-gray-500">Alamat</p>
-                    <p className="font-medium">Jakarta, Indonesia</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/reporter/report/new">
+              <Button size="lg" className="text-lg px-8 gap-2">
+                Laporkan Sekarang
+                <ArrowRight className="h-5 w-5" />
+              </Button>
+            </Link>
+            <Link href="/login">
+              <Button variant="outline" size="lg" className="text-lg px-8">
+                Cek Status Laporan
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="py-8 px-4 bg-gray-900 text-white">
+      <footer className="py-12 px-4 bg-gray-900 text-white">
         <div className="container mx-auto max-w-7xl">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-2">
-              <Shield className="h-6 w-6" />
-              <span className="font-bold text-lg">CyberGuard</span>
+          <div className="grid md:grid-cols-4 gap-8 mb-8">
+            <div>
+              <div className="flex items-center gap-2 font-bold text-xl mb-4">
+                <Shield className="h-6 w-6 text-blue-500" />
+                LaporSiber
+              </div>
+              <p className="text-sm text-gray-400">
+                Platform pelaporan kejahatan siber yang aman dan terpercaya untuk masyarakat Indonesia.
+              </p>
             </div>
-            <div className="text-sm text-gray-400 text-center">
-              &copy; 2025 CyberGuard. Melindungi keamanan digital Indonesia.
+            <div>
+              <h3 className="font-semibold mb-4">Tautan</h3>
+              <ul className="space-y-2 text-sm text-gray-400">
+                <li><a href="#fitur" className="hover:text-white transition-colors">Fitur</a></li>
+                <li><a href="#cara-kerja" className="hover:text-white transition-colors">Cara Kerja</a></li>
+                <li><a href="#cek" className="hover:text-white transition-colors">Cek Penipuan</a></li>
+                <li><a href="#statistik" className="hover:text-white transition-colors">Statistik</a></li>
+              </ul>
             </div>
-            <div className="flex gap-4 text-sm text-gray-400">
-              <Link href="/login" className="hover:text-white">
-                Masuk
-              </Link>
-              <Link href="/register" className="hover:text-white">
-                Daftar
-              </Link>
+            <div>
+              <h3 className="font-semibold mb-4">Layanan</h3>
+              <ul className="space-y-2 text-sm text-gray-400">
+                <li><Link href="/reporter/report/new" className="hover:text-white transition-colors">Buat Laporan</Link></li>
+                <li><Link href="/login" className="hover:text-white transition-colors">Cek Status</Link></li>
+                <li><Link href="/login" className="hover:text-white transition-colors">Masuk</Link></li>
+              </ul>
             </div>
+            <div>
+              <h3 className="font-semibold mb-4">Kontak</h3>
+              <ul className="space-y-2 text-sm text-gray-400">
+                <li>110 (Call Center Polisi)</li>
+                <li>info@laporsiber.id</li>
+                <li>Jakarta, Indonesia</li>
+              </ul>
+            </div>
+          </div>
+          <div className="border-t border-gray-800 pt-8 text-center text-sm text-gray-400">
+            &copy; {new Date().getFullYear()} LaporSiber. Melindungi keamanan digital Indonesia.
           </div>
         </div>
       </footer>
