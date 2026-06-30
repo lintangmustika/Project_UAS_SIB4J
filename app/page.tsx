@@ -99,6 +99,8 @@ export default function Beranda() {
             <a href="#cara-kerja" className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Cara Kerja</a>
             <a href="#cek" className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Cek Penipuan</a>
             <a href="#statistik" className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Statistik</a>
+            <Link href="/pusatinformasi" className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Informasi</Link>
+            <Link href="/pusatbantuan" className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Bantuan & Tentang Kami</Link>
           </div>
           <div className="flex items-center gap-3">
             <Link href="/login">
@@ -331,7 +333,8 @@ export default function Beranda() {
               <h3 className="font-semibold mb-4">Layanan</h3>
               <ul className="space-y-2 text-sm text-gray-400">
                 <li><Link href="/reporter/report/new" className="hover:text-white transition-colors">Buat Laporan</Link></li>
-                <li><Link href="/login" className="hover:text-white transition-colors">Cek Status</Link></li>
+                <li><Link href="/pusatinformasi" className="hover:text-white transition-colors">Pusat Informasi</Link></li>
+                <li><Link href="/pusatbantuan" className="hover:text-white transition-colors">Bantuan & Tentang Kami</Link></li>
                 <li><Link href="/login" className="hover:text-white transition-colors">Masuk</Link></li>
               </ul>
             </div>
