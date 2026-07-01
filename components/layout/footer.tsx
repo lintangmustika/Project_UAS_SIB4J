@@ -11,7 +11,7 @@ export function Footer() {
       <div className="container flex items-center justify-between py-6 px-4 mx-auto max-w-7xl">
         <div className="flex items-center gap-2 text-sm text-muted-foreground">
           <Shield className="h-4 w-4" />
-          <span>CyberGuard</span>
+          <span>LaporSiber</span>
         </div>
         <div className="text-sm text-muted-foreground">
           {user ? (

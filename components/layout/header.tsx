@@ -13,7 +13,7 @@ export function Header() {
       <div className="container flex h-14 items-center justify-between px-4 mx-auto max-w-7xl">
         <Link href="/" className="flex items-center gap-2 font-bold text-lg">
           <Shield className="h-6 w-6 text-primary" />
-          <span>CyberGuard</span>
+          <span>LaporSiber</span>
         </Link>
 
         <nav className="flex items-center gap-4">
